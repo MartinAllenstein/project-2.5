@@ -960,6 +960,12 @@ MonoBehaviour:
   speed: 3
   anim: {fileID: 810622013}
   playerSprite: {fileID: 810622012}
+  grassLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  stepsInGrass: 0
+  minStepsToEncounter: 5
+  maxStepsToEncounter: 10
 --- !u!4 &1335052437
 Transform:
   m_ObjectHideFlags: 0
