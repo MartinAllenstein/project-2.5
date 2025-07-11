@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8fc3e4f8dbc06748b88ce145181a47b, type: 3}
   m_Name: John
   m_EditorClassIdentifier: 
-  MemberName: 
-  StartingLevel: 0
-  BaseHealth: 0
-  BaseStr: 0
-  BaseInitiative: 0
+  MemberName: John
+  StartingLevel: 1
+  BaseHealth: 10
+  BaseStr: 5
+  BaseInitiative: 5
   MemberBattleVisualPrefab: {fileID: 0}
   MemberOverworldVisualPrefab: {fileID: 0}
