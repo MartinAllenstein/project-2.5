@@ -19,9 +19,9 @@ public class PlayerController : MonoBehaviour
     private float stepTimer;
     private int stepsToEncounter;
     
-    // Animator
+    // Animation
     private const string IS_WALK_PARAM = "IsWalk";
-    private const string IS_JUMP_PARAM = "IsJump";
+    //private const string IS_JUMP_PARAM = "IsJump";
     
     private const string BATTLE_SCENE = "BattleScene";
     private const float TIME_PER_STEP = 0.5f;
