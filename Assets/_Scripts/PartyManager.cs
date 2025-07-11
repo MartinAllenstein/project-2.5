@@ -23,6 +23,7 @@ public class PartyManager : MonoBehaviour
             if (allMembers[i].MemberName == memberName)
             {
                 PartyMember newPartyMember = new PartyMember();
+                
                 newPartyMember.MemberName = allMembers[i].MemberName;
                 newPartyMember.Level = allMembers[i].StartingLevel;
                 newPartyMember.CurrHealth = allMembers[i].BaseHealth;
@@ -35,6 +36,11 @@ public class PartyManager : MonoBehaviour
                 currentParty.Add(newPartyMember);
             }
         }
+    }
+
+    public List<PartyMember> GetCurrentParty()
+    {
+        return currentParty;
     }
 }
 
