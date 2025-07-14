@@ -15,7 +15,7 @@ public class BattleVisuals : MonoBehaviour
     
     [SerializeField] private Animator anim;
     
-    private const string LEVEL_ABB = "Lvl: "; //ABBREVIATION
+    private const string LEVEL_ABB = "Lvl: ";
 
     // Animation
     private const string IS_ATTACK_PARAM = "IsAttack";
