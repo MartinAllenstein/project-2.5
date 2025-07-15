@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
+using UnityEngine.Splines;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,10 +19,10 @@ public class PlayerController : MonoBehaviour
     private bool movingInGrass;
     private float stepTimer;
     private int stepsToEncounter;
+    private PartyManager partyManager;
     
     // Animation
     private const string IS_WALK_PARAM = "IsWalk";
-    //private const string IS_JUMP_PARAM = "IsJump";
     
     private const string BATTLE_SCENE = "BattleScene";
     private const float TIME_PER_STEP = 0.5f;
@@ -34,6 +35,11 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        partyManager = GameObject.FindFirstObjectByType<PartyManager>();
+        if (partyManager.GetPosition() != Vector3.zero)     // if we have a position saved
+        {
+            transform.position = partyManager.GetPosition();    // move the player
+        }
     }
 
     void Update()
@@ -73,6 +79,7 @@ public class PlayerController : MonoBehaviour
                 // check to see if we have reached an encounter ->change scene
                 if (stepsInGrass >= stepsToEncounter)
                 {
+                    partyManager.SetPosition(transform.position);
                     SceneManager.LoadScene(BATTLE_SCENE);
                 }
             }

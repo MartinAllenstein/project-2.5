@@ -704,54 +704,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1888713391}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &235761648
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 235761650}
-  - component: {fileID: 235761649}
-  m_Layer: 0
-  m_Name: Party Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &235761649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 235761648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9070d4d472ad8e6419d983038fa99dcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allMembers:
-  - {fileID: 11400000, guid: c042db5f641310c488ccf491643ee6c0, type: 2}
-  currentParty: []
-  defaultPartyMember: {fileID: 11400000, guid: c042db5f641310c488ccf491643ee6c0, type: 2}
---- !u!4 &235761650
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 235761648}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &258781935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2987,7 +2939,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1705157134}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 509822406}
+        m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
+        m_MethodName: SelectRunAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1705157134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3645,5 +3609,4 @@ SceneRoots:
   - {fileID: 2124741964}
   - {fileID: 524680021}
   - {fileID: 1974125625}
-  - {fileID: 235761650}
   - {fileID: 509822407}

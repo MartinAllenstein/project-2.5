@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class BattleSystem : MonoBehaviour
 {
@@ -34,7 +35,11 @@ public class BattleSystem : MonoBehaviour
     private const string ACTION_MESSAGE = "'s Action:";
     private const string WIN_MESSAGE = "You Won The Battle!";
     private const string LOSE_MESSAGE = "You Lost The Battle!";
+    private const string SUCCESFULY_RUN_MESSAGE = "Your Party Run Away!";
+    private const string UNSUCCESSFULY_RUN_MESSAGE = "Your Party Failed Run!";
     private const int TURN_DURATION = 2;
+    private const int RUN_CHANCE = 50;
+    private const string OVERWORLD_SCENE = "OverworldScene";
     
     void Start()
     {
@@ -44,6 +49,7 @@ public class BattleSystem : MonoBehaviour
         CreatePartyEntities();
         CreateEnemyEntities();
         ShowBattleMenu();
+        DetermineBattleOrder();
     }
 
     private IEnumerator BattleRoutine()
@@ -65,6 +71,7 @@ public class BattleSystem : MonoBehaviour
                         break;
                     case BattleEntities.Action.Run:
                         // run
+                        yield return StartCoroutine(RunRoutine());
                         break;
                     default:
                         Debug.Log("Error - incorrect battle action");
@@ -114,14 +121,14 @@ public class BattleSystem : MonoBehaviour
                     state = BattleState.Won;
                     bottomText.text = WIN_MESSAGE;
                     yield return new WaitForSeconds(TURN_DURATION);      // wait
-                    Debug.Log("Go back to overworld screen");
+                    SceneManager.LoadScene(OVERWORLD_SCENE);
                 }
             }
         }
         
         
         // Enemy turn
-        if (allBattlers[i].IsPlayer == false)
+        if (i< allBattlers.Count && allBattlers[i].IsPlayer == false)
         {
             BattleEntities currArtacker = allBattlers[i];
             currArtacker.SetTarget(GetRandomPartyMember());     // get random party member
@@ -152,6 +159,32 @@ public class BattleSystem : MonoBehaviour
         }
         
     }
+
+    private IEnumerator RunRoutine()
+    {
+        if (state == BattleState.Battle)
+        {
+            if (Random.Range(0, 101) >= RUN_CHANCE)
+            {
+                // we have run away
+
+                bottomText.text = SUCCESFULY_RUN_MESSAGE;   // set bottom text
+                state = BattleState.Run;    // set state to run
+                allBattlers.Clear();    // clear all battlers list
+                yield return new WaitForSeconds(TURN_DURATION);     // wait
+                SceneManager.LoadScene(OVERWORLD_SCENE);
+                yield break;
+            }
+            else
+            {
+                // we failed to run away
+                
+                bottomText.text = UNSUCCESSFULY_RUN_MESSAGE;   // set bottom text
+                yield return new WaitForSeconds(TURN_DURATION);     // wait
+            }
+        }
+    }
+    
     
     private void CreatePartyEntities()
     {
@@ -171,7 +204,7 @@ public class BattleSystem : MonoBehaviour
             BattleVisuals tempBattleVisuals = Instantiate(currentParty[i].MemberBattleVisualPrefab, partySpawnPoints[i].position, Quaternion.identity).GetComponent<BattleVisuals>();
             
             // set visuals starting values
-            tempBattleVisuals.SetStartingValues(currentParty[i].MaxHealth, currentParty[i].MaxHealth, currentParty[i].Level);
+            tempBattleVisuals.SetStartingValues(currentParty[i].CurrHealth, currentParty[i].MaxHealth, currentParty[i].Level);
             
             // assign it to the battle entity
             tempEntity.BattleVisuals = tempBattleVisuals;
@@ -267,6 +300,7 @@ public class BattleSystem : MonoBehaviour
         currTarget.BattleVisuals.PlayHitAnimation();    // play their hit anim
         currTarget.UpdateUI();  // update UI
         bottomText.text = string.Format("{0} attacks {1} for {2} damage", currAttacker.Name,currTarget.Name,damage);
+        SaveHealth();
     }
 
     private int GetRandomPartyMember()
@@ -295,6 +329,42 @@ public class BattleSystem : MonoBehaviour
             }
         }
         return enemies[Random.Range(0, enemies.Count)];
+    }
+
+    private void SaveHealth()
+    {
+        for (int i = 0; i < playerBattlers.Count; i++)
+        {
+            partyManager.SaveHealth(i, playerBattlers[i].CurrHealth);
+        }
+    }
+
+    private void DetermineBattleOrder()
+    {
+        allBattlers.Sort((bi1, bi2) => -bi1.Initiative.CompareTo(bi2.Initiative));  // sorts list by Initiative in ascending order
+    }
+
+    public void SelectRunAction()
+    {
+        state = BattleState.Selection;
+        // set current member target
+        BattleEntities currentPlayerEntity = playerBattlers[currentPlayer];
+
+        currentPlayerEntity.BattleAction = BattleEntities.Action.Run;
+
+        battleMenu.SetActive(false);
+        currentPlayer++;
+
+        if (currentPlayer >= playerBattlers.Count)     // if all player have selected an action
+        {
+            // start the battle
+            StartCoroutine(BattleRoutine());
+        }
+        else
+        {
+            enemySelectionMenu.SetActive(false);    // show the battle menu for the next player
+            ShowBattleMenu();
+        }
     }
 }
 
