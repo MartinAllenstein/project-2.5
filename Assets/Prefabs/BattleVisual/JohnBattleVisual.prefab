@@ -272,7 +272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6429009893063163089}
   - component: {fileID: 4222581091337045045}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: JohnBattleVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1111,7 +1111,7 @@ GameObject:
   - component: {fileID: 8843449060812571102}
   - component: {fileID: 7705822364469535920}
   - component: {fileID: 3104757023571612829}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: John_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

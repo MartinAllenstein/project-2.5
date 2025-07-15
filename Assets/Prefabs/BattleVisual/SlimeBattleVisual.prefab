@@ -480,7 +480,7 @@ GameObject:
   - component: {fileID: 2229702641014365296}
   - component: {fileID: 1278897904297122340}
   - component: {fileID: 3210661074208480257}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Slime_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -627,7 +627,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6894933017943710649}
   - component: {fileID: 17119550431528756}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SlimeBattleVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

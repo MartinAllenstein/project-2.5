@@ -61,7 +61,7 @@ public class BattleSystem : MonoBehaviour
         // loop all battlers
         for (int i = 0; i < allBattlers.Count; i++)
         {
-            if (state == BattleState.Battle)
+            if (state == BattleState.Battle && allBattlers[i].CurrHealth > 0)
             {
                 switch (allBattlers[i].BattleAction)
                 {
@@ -79,7 +79,9 @@ public class BattleSystem : MonoBehaviour
                 }
             }
 
-        } 
+        }
+        
+        RemoveDeadBattlers();
         
         // if haven't won or lost, loop => open battle menu
         if (state == BattleState.Battle)
@@ -98,7 +100,7 @@ public class BattleSystem : MonoBehaviour
         if (allBattlers[i].IsPlayer == true)
         {
             BattleEntities currArtacker = allBattlers[i];
-            if (allBattlers[currentPlayer].IsPlayer == true || currArtacker.Target >= allBattlers.Count)
+            if (allBattlers[currArtacker.Target].CurrHealth <= 0)
             {
                 currArtacker.SetTarget(GetRandomEnemy());
             }
@@ -113,7 +115,6 @@ public class BattleSystem : MonoBehaviour
                 bottomText.text = string.Format("{0} defeated {1}", currArtacker.Name, currTarget.Name);
                 yield return new WaitForSeconds(TURN_DURATION);      // wait
                 enemyBattlers.Remove(currTarget);
-                allBattlers.Remove(currTarget);
 
                 if (enemyBattlers.Count <= 0)   // if no enemy remain
                 {
@@ -143,7 +144,6 @@ public class BattleSystem : MonoBehaviour
                 bottomText.text = string.Format("{0} defeated {1}", currArtacker.Name, currTarget.Name);
                 yield return new WaitForSeconds(TURN_DURATION);      // wait
                 playerBattlers.Remove(currTarget);
-                allBattlers.Remove(currTarget);
 
                 if (playerBattlers.Count <= 0)   // if no member remain
                 {
@@ -181,6 +181,17 @@ public class BattleSystem : MonoBehaviour
                 
                 bottomText.text = UNSUCCESSFULY_RUN_MESSAGE;   // set bottom text
                 yield return new WaitForSeconds(TURN_DURATION);     // wait
+            }
+        }
+    }
+
+    private void RemoveDeadBattlers()
+    {
+        for (int i = 0; i < allBattlers.Count; i++)
+        {
+            if (allBattlers[i].CurrHealth <= 0)
+            {
+                allBattlers.RemoveAt(i);
             }
         }
     }
