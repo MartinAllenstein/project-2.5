@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 6429009893063163089}
   - component: {fileID: 4222581091337045045}
   m_Layer: 5
-  m_Name: JohnBattleVisual
+  m_Name: ClaireBattleVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -310,7 +310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 4234972930398833468}
   levelText: {fileID: 5675100403161637989}
-  anim: {fileID: 3104757023571612829}
+  anim: {fileID: 3408720794485930277}
 --- !u!1 &2650066389517809585
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +606,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: John
+  m_text: Claire
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1110,9 +1110,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8843449060812571102}
   - component: {fileID: 7705822364469535920}
-  - component: {fileID: 3104757023571612829}
+  - component: {fileID: 3408720794485930277}
   m_Layer: 5
-  m_Name: John
+  m_Name: Claire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1178,7 +1178,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -959446971, guid: b849b8992216acf48b718ff1d1862f60, type: 3}
+  m_Sprite: {fileID: -144793654, guid: 88a5815896031db4792b080da873ac99, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1189,7 +1189,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &3104757023571612829
+--- !u!95 &3408720794485930277
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -1199,7 +1199,7 @@ Animator:
   m_GameObject: {fileID: 8844037508270184499}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0518ac0067bb2ef42b78a7b43edbe2d5, type: 2}
+  m_Controller: {fileID: 9100000, guid: ac50e939074323f42931cac0b908c08d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

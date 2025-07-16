@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int stepsInGrass;
     [SerializeField] private int minStepsToEncounter;
     [SerializeField] private int maxStepsToEncounter;
-    
+
+    private PlayerControls playerControls;
     private Rigidbody rb;
     private Vector3 movement;
     private bool movingInGrass;
@@ -29,7 +30,18 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        playerControls = new PlayerControls();
         CalculateStepToNextEncounter();
+    }
+
+    private void OnEnable()
+    {
+        playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerControls.Disable();
     }
 
     void Start()
@@ -44,7 +56,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
+        float x = playerControls.Player.Move.ReadValue<Vector2>().x;
+        float z = playerControls.Player.Move.ReadValue<Vector2>().y;
+        
+        movement = new Vector3(x, 0, z);
         
         anim.SetBool(IS_WALK_PARAM, movement!=Vector3.zero);
 
