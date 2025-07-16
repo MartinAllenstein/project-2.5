@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private float stepTimer;
     private int stepsToEncounter;
     private PartyManager partyManager;
+    private Vector3 scale;
     
     // Animation
     private const string IS_WALK_PARAM = "IsWalk";
@@ -66,12 +67,12 @@ public class PlayerController : MonoBehaviour
         // Flip sprite
         if (movement.x != 0 && movement.x < 0)
         {
-            playerSprite.flipX = true;
+            playerSprite.transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
         }
 
         if (movement.x != 0 && movement.x > 0)
         {
-            playerSprite.flipX = false;
+            playerSprite.transform.localScale = new Vector3(scale.x, scale.y, scale.z);
         }
     }
 
@@ -106,9 +107,10 @@ public class PlayerController : MonoBehaviour
         stepsToEncounter = Random.Range(minStepsToEncounter, maxStepsToEncounter);
     }
 
-    public void SetOverworldVisuals(Animator animator, SpriteRenderer spriteRenderer)
+    public void SetOverworldVisuals(Animator animator, SpriteRenderer spriteRenderer, Vector3 playerScale)
     {
         anim = animator;
         playerSprite = spriteRenderer;
+        scale = playerScale;
     }
 }

@@ -85,7 +85,7 @@ public class CharacterManager : MonoBehaviour
                 playerVisual.transform.SetParent(player.transform);
 
                 player.GetComponent<PlayerController>().SetOverworldVisuals(playerVisual.GetComponent<Animator>(),
-                    playerVisual.GetComponent<SpriteRenderer>());   // assign the player controller values
+                    playerVisual.GetComponent<SpriteRenderer>(), playerVisual.transform.localScale);   // assign the player controller values
                 playerVisual.GetComponent<MemberFollowAI>().enabled = false;
                 overworldCharacters.Add(playerVisual);  // add the overworld character visual to the list
             }

@@ -8,9 +8,14 @@ public class MemberFollowAI : MonoBehaviour
     private float followDist;
     private Animator anim;
     private SpriteRenderer spriteRenderer;
+    private Vector3 scale;
     
     private const string IS_WALK_PARAM = "IsWalk";
-    
+
+    private void Awake()
+    {
+        scale = transform.localScale;
+    }
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
@@ -30,11 +35,11 @@ public class MemberFollowAI : MonoBehaviour
 
             if (followTarget.position.x - transform.position.x < 0)
             {
-                spriteRenderer.flipX = true;
+                spriteRenderer.transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
             }
             else
             {
-                spriteRenderer.flipX = false;
+                spriteRenderer.transform.localScale = new Vector3(scale.x, scale.y, scale.z);
             }
         }
         else
